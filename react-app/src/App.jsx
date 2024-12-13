@@ -9,14 +9,19 @@ function App() {
   return (
     <>
       <div className={classnames(classes.main, "border-zinc-300 rounded-md")}>
-        <div className="flex h-20 flex-row border-fuchsia-400 p-4 my-4 rounded-md border-2 justify-around w-full mx-auto  bg-white">
+        <div
+          className={classnames(
+            classes.header,
+            "rounded-md border-2 border-slate-100"
+          )}
+        >
           <NavLink to="/" end>
-            <button className="rounded h-full w-64 bg-indigo-500 hover:bg-violet-600 text-teal-100">
-              Home
+            <button className="rounded h-10 w-64 bg-indigo-500 hover:bg-indigo-600 text-teal-100 ">
+              Search
             </button>
           </NavLink>
           <NavLink to="/dashboard" end>
-            <button className="rounded h-full w-64 bg-indigo-500 hover:bg-violet-600 text-teal-100">
+            <button className="rounded h-10  w-64 bg-indigo-500 hover:bg-indigo-600 text-teal-100">
               Dashboard
             </button>
           </NavLink>
@@ -24,7 +29,7 @@ function App() {
         <div
           className={classnames(
             classes.content,
-            "rounded-md border-2 border-fuchsia-400"
+            "rounded-md border-2 border-slate-100"
           )}
         >
           <Routes>

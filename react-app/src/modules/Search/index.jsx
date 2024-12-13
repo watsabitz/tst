@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 const Search = () => {
   const [searchedText, setSearchedText] = useState("");
-  const [result, setResults] = useState(["romania"]);
+  const [results, setResults] = useState([]);
 
   const fetchData = async (value) => {
     const baseUrl = "http://localhost:8080";
@@ -33,17 +33,31 @@ const Search = () => {
           type="text"
           className={classnames(
             classes.searchInput,
-            "border-2 border-indigo-500/100 rounded-md w-5/6 my-4 h-10"
+            "border-2 border-indigo-100 rounded-md w-full my-2 p-2 h-12"
           )}
           id="search"
           value={searchedText}
           onChange={handlesearchInput}
         />
-      </div>
-      <div>
-        {result.map((result, i) => {
-          return <div key={`$result + ${i}`}>{result}</div>;
-        })}
+        {results.length > 0 && (
+          <div
+            className={classnames(
+              classes.searchResults,
+              "rounded-md border-2 border-slate-100"
+            )}
+          >
+            {results.map((result, i) => {
+              return (
+                <div
+                  className={classnames(classes.searchItem, "p-4")}
+                  key={`$result + ${i}`}
+                >
+                  {result}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
