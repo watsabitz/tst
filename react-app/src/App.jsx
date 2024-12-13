@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import classnames from "classnames";
+import classes from "./index.module.scss";
+
+import { NavLink, Route, Routes } from "react-router";
+import Search from "./modules/Search";
+import Dashboard from "./modules/Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className={classnames(classes.main, "border-zinc-300 rounded-md")}>
+        <div className="flex h-20 flex-row border-fuchsia-400 p-4 my-4 rounded-md border-2 justify-around w-full mx-auto  bg-white">
+          <NavLink to="/" end>
+            <button className="rounded h-full w-64 bg-indigo-500 hover:bg-violet-600 text-teal-100">
+              Home
+            </button>
+          </NavLink>
+          <NavLink to="/dashboard" end>
+            <button className="rounded h-full w-64 bg-indigo-500 hover:bg-violet-600 text-teal-100">
+              Dashboard
+            </button>
+          </NavLink>
+        </div>
+        <div
+          className={classnames(
+            classes.content,
+            "rounded-md border-2 border-fuchsia-400"
+          )}
+        >
+          <Routes>
+            <Route index element={<Search />} />
+            <Route path="dashboard" element={<Dashboard />} />
+          </Routes>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
