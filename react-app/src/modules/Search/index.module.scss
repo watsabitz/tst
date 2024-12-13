@@ -17,20 +17,27 @@
         outline: inherit;
       }
     }
-    .searchResults {
-      width: 100%;
-      margin-bottom: 2rem;
-      color: black;
-      cursor: pointer;
-      max-height: 50rem;
-      overflow: auto;
-      .searchItem {
-        &:nth-child(odd) {
-          background-color: #f3f8ff;
-        }
-        &:hover {
-          background-color: #e2eeff;
-        }
+  }
+  .loading {
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .searchResults {
+    width: 80%;
+    margin-bottom: 2rem;
+    color: black;
+    cursor: pointer;
+    max-height: 50rem;
+    overflow: auto;
+    .searchItem {
+      &:nth-child(odd) {
+        background-color: #f3f8ff;
+      }
+      &:hover {
+        background-color: #e2eeff;
       }
     }
   }

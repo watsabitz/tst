@@ -1,9 +1,10 @@
 import classnames from "classnames";
 import classes from "./index.module.scss";
-
 import { NavLink, Route, Routes } from "react-router";
 import Search from "./modules/Search";
 import Dashboard from "./modules/Dashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
