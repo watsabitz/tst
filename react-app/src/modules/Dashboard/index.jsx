@@ -86,8 +86,6 @@ const Dashboard = () => {
           value={selectedOptions}
           onChange={handleChange}
         />
-        <label htmlFor="range">Select range</label>
-        <input id="range" type="range" className="w-1/2" min="0" max="100" />
       </div>
       <div>
         <ChartExample
