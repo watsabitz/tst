@@ -67,6 +67,7 @@ const Search = () => {
           <h3 className="text-indigo-500 text-lg font-bold">Search country</h3>
         </label>
         <input
+          placeholder="Type to search ..."
           type="text"
           className={classnames(
             classes.searchInput,
