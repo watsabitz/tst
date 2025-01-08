@@ -1,0 +1,9 @@
+.main {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  .header {
+    display: flex;
+    align-items: center;
+  }
+}
