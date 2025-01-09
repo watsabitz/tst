@@ -1,36 +1,20 @@
 import { useEffect, useState } from "react";
 import { AgCharts } from "ag-charts-react";
 
-const BarChart = ({ fetchedData = {}, currentPage, pageSize }) => {
+const PieChart = ({ fetchedData = {}, currentPage, pageSize }) => {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
     const config = {
       title: {
-        text: "Sum Characters In Chunk",
+        text: "Percentage Of Characters",
       },
       data: [],
       series: [
         {
-          type: "bar",
-          xKey: "character",
-          yKey: `sum`,
-        },
-      ],
-      axes: [
-        {
-          type: "category",
-          position: "bottom",
-          title: {
-            text: "Character",
-          },
-        },
-        {
-          type: "number",
-          position: "left",
-          title: {
-            text: "Amount",
-          },
+          type: "pie",
+          angleKey: "amount",
+          legendItemKey: "character",
         },
       ],
     };
@@ -38,13 +22,24 @@ const BarChart = ({ fetchedData = {}, currentPage, pageSize }) => {
     const startIndex = (currentPage - 1) * pageSize;
 
     config.data = [];
+
+    let totalSum = 0;
+    const tmpObj = {};
     for (const [key, value] of Object.entries(fetchedData)) {
       const slicedValues = value.splice(startIndex, pageSize);
       const sum = slicedValues.reduce(
         (prevValue, currentValue) => prevValue + currentValue,
         0
       );
-      config.data.push({ character: key, sum });
+      totalSum = totalSum + sum;
+      tmpObj[key] = sum;
+    }
+
+    for (const [key, value] of Object.entries(tmpObj)) {
+      config.data.push({
+        character: key,
+        amount: Number(((value * 100) / totalSum).toFixed(2)),
+      });
     }
 
     setChartOptions(config);
@@ -53,4 +48,4 @@ const BarChart = ({ fetchedData = {}, currentPage, pageSize }) => {
   return <AgCharts options={chartOptions} />;
 };
 
-export default BarChart;
+export default PieChart;

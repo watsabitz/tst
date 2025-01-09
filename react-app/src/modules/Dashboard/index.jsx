@@ -4,6 +4,7 @@ import classes from "./index.module.scss";
 import joinCls from "classnames";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
+import PieChart from "./PieChart";
 
 const Dashboard = () => {
   const pageSize = 200;
@@ -46,6 +47,8 @@ const Dashboard = () => {
 
     if (selectedOptions.length > 0) {
       fetchData();
+    } else {
+      setFetchedData([]);
     }
   }, [selectedOptions, setFetchedData]);
 
@@ -79,7 +82,14 @@ const Dashboard = () => {
           pageSize={pageSize}
         />
       </div>
-      <div className={classes.pie}>a</div>
+      <div className={classes.pie}>
+        <PieChart
+          fetchedData={fetchedData}
+          selectedOptions={selectedOptions}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      </div>
       <div className={classes.std}>b</div>
     </div>
   );

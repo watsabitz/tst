@@ -31,25 +31,22 @@ const LineChart = ({ fetchedData = {}, currentPage, pageSize }) => {
 
     const startIndex = (currentPage - 1) * pageSize;
 
-    if (Object.keys(fetchedData).length === 0) {
-      config.data = [];
-    } else {
-      for (const [key, value] of Object.entries(fetchedData)) {
-        const slicedValues = value.splice(startIndex, pageSize);
-        slicedValues.forEach((value, index) => {
-          if (!config.data[index]) {
-            config.data.push({ index: index.toString() });
-          }
-          config.data[index][key] = value;
-        });
+    config.data = [];
+    for (const [key, value] of Object.entries(fetchedData)) {
+      const slicedValues = value.splice(startIndex, pageSize);
+      slicedValues.forEach((value, index) => {
+        if (!config.data[index]) {
+          config.data.push({ index: index.toString() });
+        }
+        config.data[index][key] = value;
+      });
 
-        config.series.push({
-          type: "line",
-          xKey: "index",
-          yKey: key,
-          yName: key,
-        });
-      }
+      config.series.push({
+        type: "line",
+        xKey: "index",
+        yKey: key,
+        yName: key,
+      });
     }
 
     setChartOptions(config);
