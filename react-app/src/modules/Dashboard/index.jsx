@@ -1,68 +1,9 @@
 import { useEffect, useState } from "react";
-import { AgCharts } from "ag-charts-react";
 import Select from "react-select";
 import classes from "./index.module.scss";
 import classnames from "classnames";
-
-const BarChart = ({
-  fetchedData = {},
-  selectedOptions,
-  currentPage,
-  pageSize,
-}) => {
-  const [chartOptions, setChartOptions] = useState({});
-
-  useEffect(() => {
-    const config = {
-      title: {
-        text: "Frequency of the most common character",
-      },
-      data: [],
-      series: [
-        {
-          type: "bar",
-          xKey: "character",
-          yKey: `sum`,
-        },
-      ],
-      axes: [
-        {
-          type: "category",
-          position: "bottom",
-          title: {
-            text: "Character",
-          },
-        },
-        {
-          type: "number",
-          position: "left",
-          title: {
-            text: "Amount",
-          },
-        },
-      ],
-    };
-
-    const startIndex = (currentPage - 1) * pageSize;
-
-    if (Object.keys(fetchedData) === 0) {
-      config.data = [];
-    } else {
-      for (const [key, value] of Object.entries(fetchedData)) {
-        const slicedValues = value.splice(startIndex, pageSize);
-        const sum = slicedValues.reduce(
-          (prevValue, currentValue) => prevValue + currentValue,
-          0
-        );
-        config.data.push({ character: key, sum });
-      }
-    }
-
-    setChartOptions(config);
-  }, [fetchedData, currentPage, pageSize]);
-
-  return <AgCharts options={chartOptions} />;
-};
+import BarChart from "./BarChart";
+import LineChart from "./LineChart";
 
 const Dashboard = () => {
   const pageSize = 200;
@@ -125,6 +66,14 @@ const Dashboard = () => {
         </div>
         <div className="w-1/2">
           <BarChart
+            fetchedData={fetchedData}
+            selectedOptions={selectedOptions}
+            currentPage={currentPage}
+            pageSize={pageSize}
+          />
+        </div>
+        <div className="w-1/2">
+          <LineChart
             fetchedData={fetchedData}
             selectedOptions={selectedOptions}
             currentPage={currentPage}
