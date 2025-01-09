@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import classes from "./index.module.scss";
-import classnames from "classnames";
+import joinCls from "classnames";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 
@@ -50,38 +50,37 @@ const Dashboard = () => {
   }, [selectedOptions, setFetchedData]);
 
   return (
-    <div className={classnames(classes.main, "w-full p-4")}>
-      <div className={classnames(classes.leftSide)}>
-        <div className={classnames(classes.header, "w-full flex my-10 gap-4")}>
-          <label htmlFor="fields">Select fields</label>
-          <Select
-            id="fields"
-            isMulti
-            name="fields"
-            options={options}
-            className="w-1/2"
-            value={selectedOptions}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="w-1/2">
-          <BarChart
-            fetchedData={fetchedData}
-            selectedOptions={selectedOptions}
-            currentPage={currentPage}
-            pageSize={pageSize}
-          />
-        </div>
-        <div className="w-1/2">
-          <LineChart
-            fetchedData={fetchedData}
-            selectedOptions={selectedOptions}
-            currentPage={currentPage}
-            pageSize={pageSize}
-          />
-        </div>
+    <div className={classes.main}>
+      <div className={classes.header}>
+        <label htmlFor="fields">Select fields</label>
+        <Select
+          id="fields"
+          isMulti
+          name="fields"
+          options={options}
+          className="w-1/2"
+          value={selectedOptions}
+          onChange={handleChange}
+        />
       </div>
-      <div className={classnames(classes.leftSide)}>right side</div>
+      <div className={classes.bar}>
+        <BarChart
+          fetchedData={fetchedData}
+          selectedOptions={selectedOptions}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      </div>
+      <div className={classes.line}>
+        <LineChart
+          fetchedData={fetchedData}
+          selectedOptions={selectedOptions}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      </div>
+      <div className={classes.pie}>a</div>
+      <div className={classes.std}>b</div>
     </div>
   );
 };
