@@ -1,0 +1,18 @@
+.headerBox {
+  display: flex;
+  width: 100%;
+  > * {
+    width: 50%;
+  }
+  .select {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    label {
+      width: 8rem;
+    }
+    > div {
+      width: 100%;
+    }
+  }
+}

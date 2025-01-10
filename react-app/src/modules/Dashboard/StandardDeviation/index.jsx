@@ -29,7 +29,6 @@ const StandardDeviation = ({ fetchedData = {} }) => {
       );
       const variance = sum2 / deviationsSquare.length;
       const standardDeviation = Math.sqrt(variance);
-      console.log(mean, standardDeviation);
       tmp2[key] = [key, mean, standardDeviation];
     }
     setTableData(tmp2);
@@ -37,21 +36,25 @@ const StandardDeviation = ({ fetchedData = {} }) => {
   return (
     <div className={styles.tableBox}>
       <table>
-        <tr>
-          <th colSpan="3">STD Table</th>
-        </tr>
-        <tr>
-          <th>Character</th>
-          <th>Mean</th>
-          <th>STD</th>
-        </tr>
-        {Object.values(tableData).map(([key, mean, standardDeviation]) => (
-          <tr key={key}>
-            <td>{key}</td>
-            <td>{mean.toFixed(2)}</td>
-            <td>{standardDeviation.toFixed(2)}</td>
+        <thead>
+          <tr>
+            <th colSpan="3">STD Table</th>
           </tr>
-        ))}
+          <tr>
+            <th>Character</th>
+            <th>Mean</th>
+            <th>STD</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(tableData).map(([key, mean, standardDeviation]) => (
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{mean.toFixed(2)}</td>
+              <td>{standardDeviation.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

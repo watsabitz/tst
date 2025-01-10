@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import Select from "react-select";
 import classes from "./index.module.scss";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 import StandardDeviation from "./StandardDeviation";
+import Header from "./Header";
+
+const PAGE_SIZE = 200;
 
 const Dashboard = () => {
-  const pageSize = 200;
-  const currentPage = 2;
-
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
 
-  const handleChange = (selected) => {
-    setSelectedOptions(selected);
-  };
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -37,6 +35,7 @@ const Dashboard = () => {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           fields,
         }),
@@ -52,18 +51,26 @@ const Dashboard = () => {
     }
   }, [selectedOptions, setFetchedData]);
 
+  useEffect(() => {
+    if (Object.values(fetchedData).length > 0) {
+      const itemsLength = Object.values(fetchedData)[0].length;
+      const pageCount = Math.ceil(itemsLength / PAGE_SIZE);
+      setPageCount(pageCount);
+    } else {
+      setPageCount(1);
+    }
+  }, [fetchedData]);
+
   return (
     <div className={classes.main}>
       <div className={classes.header}>
-        <label htmlFor="fields">Select fields</label>
-        <Select
-          id="fields"
-          isMulti
-          name="fields"
+        <Header
           options={options}
-          className="w-1/2"
-          value={selectedOptions}
-          onChange={handleChange}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
+          pageCount={pageCount}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       </div>
       <div className={classes.bar}>
@@ -71,7 +78,7 @@ const Dashboard = () => {
           fetchedData={fetchedData}
           selectedOptions={selectedOptions}
           currentPage={currentPage}
-          pageSize={pageSize}
+          pageSize={PAGE_SIZE}
         />
       </div>
       <div className={classes.line}>
@@ -79,7 +86,7 @@ const Dashboard = () => {
           fetchedData={fetchedData}
           selectedOptions={selectedOptions}
           currentPage={currentPage}
-          pageSize={pageSize}
+          pageSize={PAGE_SIZE}
         />
       </div>
       <div className={classes.pie}>
@@ -87,7 +94,7 @@ const Dashboard = () => {
           fetchedData={fetchedData}
           selectedOptions={selectedOptions}
           currentPage={currentPage}
-          pageSize={pageSize}
+          pageSize={PAGE_SIZE}
         />
       </div>
       <div className={classes.std}>
