@@ -1,8 +1,10 @@
 .headerBox {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   width: 100%;
   > * {
-    width: 50%;
+    width: 100%;
   }
   .select {
     display: flex;
@@ -13,6 +15,14 @@
     }
     > div {
       width: 100%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .headerBox {
+    > * {
+      width: 50%;
     }
   }
 }

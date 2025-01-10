@@ -3,12 +3,14 @@
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1fr 3fr 3fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr 3fr 3fr 3fr 3fr;
   grid-template-areas:
-    "header header header header header std std"
-    "bar bar bar pie pie std std"
-    "line line line pie pie std std";
+    "header header header"
+    "bar bar bar"
+    "line line line"
+    "pie pie pie"
+    "std std std";
   > * {
     border: 2px solid rgb(229, 231, 235);
     border-radius: 0.5rem;
@@ -33,5 +35,28 @@
   }
   .std {
     grid-area: std;
+  }
+}
+
+@media (min-width: 992px) {
+  .main {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 3fr 3fr 3fr;
+    grid-template-areas:
+      "header header header header header"
+      "bar bar bar pie pie"
+      "line line line pie pie"
+      "std std std std std";
+  }
+}
+
+@media (min-width: 1400px) {
+  .main {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr 3fr 3fr;
+    grid-template-areas:
+      "header header header header header std std"
+      "bar bar bar pie pie std std"
+      "line line line pie pie std std";
   }
 }
