@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import classes from "./index.module.scss";
-import joinCls from "classnames";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
+import StandardDeviation from "./StandardDeviation";
 
 const Dashboard = () => {
   const pageSize = 200;
@@ -90,7 +90,9 @@ const Dashboard = () => {
           pageSize={pageSize}
         />
       </div>
-      <div className={classes.std}>b</div>
+      <div className={classes.std}>
+        <StandardDeviation fetchedData={fetchedData} />
+      </div>
     </div>
   );
 };

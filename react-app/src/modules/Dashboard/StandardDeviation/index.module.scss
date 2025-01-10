@@ -1,0 +1,11 @@
+.tableBox {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  table,
+  td,
+  th {
+    border: 2px solid rgb(229, 231, 235);
+    padding: 1rem;
+  }
+}
