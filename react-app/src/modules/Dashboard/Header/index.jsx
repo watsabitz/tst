@@ -10,6 +10,7 @@ const Header = ({
   pageCount,
   currentPage,
   setCurrentPage,
+  fetchedData,
 }) => {
   const handleChange = (selected) => {
     setSelectedOptions(selected);
@@ -29,11 +30,13 @@ const Header = ({
         />
       </div>
       <div className={styles.pagination}>
-        <ResponsivePagination
-          current={currentPage}
-          total={pageCount}
-          onPageChange={setCurrentPage}
-        />
+        {Object.keys(fetchedData).length > 0 && (
+          <ResponsivePagination
+            current={currentPage}
+            total={pageCount}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </div>
   );

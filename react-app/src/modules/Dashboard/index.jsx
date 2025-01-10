@@ -11,7 +11,7 @@ const PAGE_SIZE = 200;
 const Dashboard = () => {
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedData, setFetchedData] = useState({});
 
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,6 +71,7 @@ const Dashboard = () => {
           pageCount={pageCount}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          fetchedData={fetchedData}
         />
       </div>
       <div className={classes.bar}>
