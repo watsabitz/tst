@@ -16,8 +16,7 @@ const StandardDeviation = ({ fetchedData = {} }) => {
     for (const [key, value] of Object.entries(fetchedData)) {
       const mean = tmp1[key];
       const deviationsSquare = [];
-      const slicedValues = value.splice(0, 10);
-      slicedValues.forEach((val) => {
+      value.forEach((val) => {
         const deviation = val - mean;
         const deviationSquare = Math.pow(deviation, 2);
         deviationsSquare.push(deviationSquare);

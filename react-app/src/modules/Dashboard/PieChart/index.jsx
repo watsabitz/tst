@@ -25,8 +25,9 @@ const PieChart = ({ fetchedData = {}, currentPage, pageSize }) => {
 
     let totalSum = 0;
     const tmpObj = {};
+    console.log(fetchedData);
     for (const [key, value] of Object.entries(fetchedData)) {
-      const slicedValues = value.splice(startIndex, pageSize);
+      const slicedValues = [...value].splice(startIndex, pageSize);
       const sum = slicedValues.reduce(
         (prevValue, currentValue) => prevValue + currentValue,
         0

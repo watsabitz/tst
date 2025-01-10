@@ -39,7 +39,7 @@ const BarChart = ({ fetchedData = {}, currentPage, pageSize }) => {
 
     config.data = [];
     for (const [key, value] of Object.entries(fetchedData)) {
-      const slicedValues = value.splice(startIndex, pageSize);
+      const slicedValues = [...value].splice(startIndex, pageSize);
       const sum = slicedValues.reduce(
         (prevValue, currentValue) => prevValue + currentValue,
         0

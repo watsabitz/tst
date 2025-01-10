@@ -33,7 +33,7 @@ const LineChart = ({ fetchedData = {}, currentPage, pageSize }) => {
 
     config.data = [];
     for (const [key, value] of Object.entries(fetchedData)) {
-      const slicedValues = value.splice(startIndex, pageSize);
+      const slicedValues = [...value].splice(startIndex, pageSize);
       slicedValues.forEach((value, index) => {
         if (!config.data[index]) {
           config.data.push({ index: index.toString() });
